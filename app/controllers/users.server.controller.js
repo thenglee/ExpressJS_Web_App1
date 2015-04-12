@@ -1,5 +1,6 @@
 var User = require('mongoose').model('User');
 
+
 exports.create = function(req, res, nexr){
 	var user = new User(req.body);
 
@@ -11,4 +12,17 @@ exports.create = function(req, res, nexr){
 		}
 	});
 };
+
+
+exports.list = function(req, res, next){
+	User.find({}, function(err, users){
+		if (err){
+			return next(err);
+		}else{
+			res.json(users);
+		}
+	});
+};
+
+
 
